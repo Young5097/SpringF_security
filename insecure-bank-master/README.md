@@ -1,5 +1,5 @@
 # Insecure Bank
-![Insecure-Bank](https://hdivsecurity.com/img/bank.png)
+
 ## Running the application locally
 
 1. Clone the repository:
