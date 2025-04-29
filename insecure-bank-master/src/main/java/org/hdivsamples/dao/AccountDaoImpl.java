@@ -26,8 +26,6 @@ public class AccountDaoImpl implements AccountDao {
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
-	@Autowired
-	private Connection connection;
 
 	@Override
 	public List<Account> findUsersByUsernameAndPassword(final String username, final String password) {
