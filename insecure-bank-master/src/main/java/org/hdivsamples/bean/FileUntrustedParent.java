@@ -8,7 +8,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import org.hdivsamples.dto.AllowedCommands;
+import org.hdivsamples.filter.AllowedCommands;
 
 public class FileUntrustedParent {
 

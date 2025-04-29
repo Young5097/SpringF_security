@@ -1,4 +1,4 @@
-package org.hdivsamples.dto;
+package org.hdivsamples.filter;
 
 import java.util.Arrays;
 import java.util.List;
