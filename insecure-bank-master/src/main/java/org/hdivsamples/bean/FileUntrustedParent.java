@@ -3,8 +3,12 @@ package org.hdivsamples.bean;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
+
+import org.hdivsamples.dto.AllowedCommands;
 
 public class FileUntrustedParent {
 
@@ -12,6 +16,9 @@ public class FileUntrustedParent {
 
 	public FileUntrustedParent() {
 		System.out.println("ConstructorParent");
+
+		List<String> allowedCommands = new ArrayList<>();
+		allowedCommands.add("date");
 
 		// Add 10 minutes to date
 		Calendar now = Calendar.getInstance();
@@ -22,6 +29,9 @@ public class FileUntrustedParent {
 			Runtime rt = Runtime.getRuntime();
 
 			String[] command = new String[] { "sudo", "date", "-s", teenMinutesFromNow.toString() };
+			if (!AllowedCommands.isAllowed(command[1])) {
+				return;
+			}
 
 			// Not working: String command = "sudo date -s \'" + teenMinutesFromNow.toString() + "\"";
 			System.out.println(command);

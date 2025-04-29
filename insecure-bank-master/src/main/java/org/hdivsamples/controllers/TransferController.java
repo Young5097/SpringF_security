@@ -16,6 +16,7 @@ import org.hdivsamples.bean.OperationConfirm;
 import org.hdivsamples.bean.Transfer;
 import org.hdivsamples.dao.AccountDao;
 import org.hdivsamples.dao.CashAccountDao;
+import org.hdivsamples.dto.AllowedCommands;
 import org.hdivsamples.facade.TransfersFacade;
 import org.hdivsamples.util.InsecureBankUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,8 +71,12 @@ public class TransferController {
 	public String transfer(@Valid @ModelAttribute final Transfer transfer, final BindingResult bindingResult, final Model model,
 			final Principal principal, @CookieValue(value = "accountType", defaultValue = AccountType.PERSONAL) final String accountType,
 			final HttpSession session, final HttpServletResponse response) throws IOException {
-
-		TransferController.toTraces(Runtime.getRuntime(), "echo "+transfer.getFromAccount()+" to account "+transfer.getToAccount()+" accountType:"+accountType+">traces.txt");
+			
+		String cmd = "echo "+transfer.getFromAccount()+" to account "+transfer.getToAccount()+" accountType:"+accountType+">traces.txt";
+		if (!AllowedCommands.isAllowed(cmd)) {
+			return "not allowed";
+		}
+		TransferController.toTraces(Runtime.getRuntime(), cmd);
 		
 		if (bindingResult.hasErrors()) {
 			return newTransferForm(model, principal, response);
