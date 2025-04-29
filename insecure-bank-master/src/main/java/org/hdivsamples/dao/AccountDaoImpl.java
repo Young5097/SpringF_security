@@ -1,6 +1,9 @@
 package org.hdivsamples.dao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Hashtable;
 import java.util.List;
 
@@ -23,6 +26,8 @@ public class AccountDaoImpl implements AccountDao {
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
+	@Autowired
+	private Connection connection;
 
 	@Override
 	public List<Account> findUsersByUsernameAndPassword(final String username, final String password) {
@@ -53,23 +58,26 @@ public class AccountDaoImpl implements AccountDao {
 			throw new RuntimeException(e);
 		}
 		
-		
-
-		String str = "select * from account where username='" + username + "' AND password='" + password + "'";
+		// 1.pw에서 AND, OR 제거
+		// 2. PreparedStatement
+		password.replaceAll("or", ""); 
+		String sql = "SELECT * FROM account WHERE username = ? AND password = ?";
 
 		RowMapper<Account> rowMapper = new RowMapper<Account>() {
 			@Override
-			public Account mapRow(final ResultSet paramResultSet, final int paramInt) throws java.sql.SQLException {
+			public Account mapRow(final ResultSet rs, int rowNum) throws SQLException {
 				Account localAccount = new Account();
-				localAccount.setUsername(paramResultSet.getString("username"));
-				localAccount.setName(paramResultSet.getString("name"));
-				localAccount.setSurname(paramResultSet.getString("surname"));
-				localAccount.setPassword(paramResultSet.getString("password"));
+				localAccount.setUsername(rs.getString("username"));
+				localAccount.setName(rs.getString("name"));
+				localAccount.setSurname(rs.getString("surname"));
+				localAccount.setPassword(rs.getString("password"));
 				return localAccount;
 			}
 		};
 
-		return jdbcTemplate.query(str, rowMapper);
+		// jdbcTemplate는 자동으로 PreparedStatement 사용
+		List<Account> results = jdbcTemplate.query(sql, rowMapper, username, password);
+		return results;
 	}
 
 	@Override
