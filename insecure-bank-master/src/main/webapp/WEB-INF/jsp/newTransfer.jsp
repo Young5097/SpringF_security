@@ -105,6 +105,7 @@
 									</div>
 									<div class="widget-content">										
     									<form:form method="POST" class="form-horizontal" role="form" commandName="transfer" action="transfer">								
+											<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 											<spring:bind path="fromAccount">											
 											<div class="form-group">
 												<label class="col-md-2 control-label">From Account</label>

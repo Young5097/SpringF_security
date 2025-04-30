@@ -98,6 +98,7 @@
 							 			</spring:url>
 										<img id="userAvatarImage" src="${userAvatar}" class="img-thumbnail" alt="avatar" style="border:solid 1px grey;cursor:pointer;" />
 										<form:form id="userAvatarForm" action="userDetail/avatar/update" method="POST" style="display:none" enctype="multipart/form-data">
+											<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 											<input id="userAvatarInput" type="file" name="imageFile"/>
 										</form:form>
 									</div>
@@ -121,6 +122,7 @@
 											<dt style="padding: 10px 0px 10px 0px;">Digital Certificate:</dt>
 											<dd style="padding: 10px 0px 10px 0px;">
 												<form:form method="POST" class="form-horizontal" role="form" commandName="account" action="userDetail/certificate">
+													<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 													<form:input type="hidden" path="username" /> 
 													<button type="submit">Download</button>
 												</form:form>
@@ -128,6 +130,7 @@
 											<dt style="padding: 10px 0px 10px 0px;">Malicious Certificate:</dt>
 											<dd style="padding: 10px 0px 10px 0px;">
 												<form:form method="POST" class="form-horizontal" role="form" commandName="accountMalicious" action="userDetail/maliciouscertificate">
+													<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 													<form:input type="hidden" path="username" /> 
 													<button type="submit">Download</button>
 												</form:form>
@@ -138,8 +141,8 @@
 
 													<form:form action="userDetail/newcertificate" method="POST"
 														enctype="multipart/form-data">
+														<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 														<input id="file" type="file" name="file" />
-
 														<button type="submit" style="margin-top: 5px;">Upload</button>
 													</form:form>
 												</dd>

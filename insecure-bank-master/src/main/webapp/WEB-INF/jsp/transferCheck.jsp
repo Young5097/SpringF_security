@@ -127,6 +127,7 @@
 									</div>
 									<div class="widget-content">										
     									<form:form method="POST" class="form-horizontal" role="form" commandName="operationConfirm" action="transfer/confirm">								
+											<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 											<spring:bind path="code">											
 											<div class="form-group">
 												<label class="col-md-2 control-label">Code</label>

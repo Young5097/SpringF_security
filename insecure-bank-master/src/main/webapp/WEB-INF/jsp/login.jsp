@@ -20,6 +20,8 @@
 						</div>
 					</c:if>					
 					<form action="" method="POST" accept-charset="utf-8" class="form-horizontal" role="form">
+						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+
 						<div class="form-group">
 							<label for="inputEmail3b" class="control-label sr-only">Email</label>
 							<div class="col-sm-12">
