@@ -5,12 +5,17 @@
 ![Config](https://github.com/user-attachments/assets/249f55d2-c062-409d-a795-99c5aca2d995)
 
 2. 환경변수 설정
+   
+- cmd를 관리자 권한으로 실행 후, 환경변수로 등록
 ```
 setx JAVA_HOME "C:\Program Files\Java\jdk-17" /M<br/>
 setx PATH "%PATH%;%JAVA_HOME%\bin" /M
 
 setx MAVEN_HOME "C:\Program Files\Apache\Maven\apache-maven-3.9.6" /M<br/>
 setx PATH "%PATH%;%MAVEN_HOME%\bin" /M
+
+setx NODEJS_HOME "c:\JAVA\node-v22.14.0-win-x64" /M
+setx PATH "%PATH%;c:\JAVA\node-v22.14.0-win-x64" /M
 ```
 
 <h4>실행</h4>
